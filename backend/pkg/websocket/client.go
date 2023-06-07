@@ -10,7 +10,7 @@ import (
 
 type Client struct{
 	ID string
-	Conn *websocket.Conn		//gorilla websocket is the connection here
+	Conn *websocket.Conn
 	Pool *Pool
 	mu  sync.Mutex
 }
@@ -21,9 +21,9 @@ type Message struct{
 }
 
 func (c *Client) Read(){
-	defer func (){			// the function which don't have any name should call themselves
-		c.Pool.UnRegister <- c		//unregister kardo is client ko
-		c.Conn.Close()				// close the connection
+	defer func (){			
+		c.Pool.UnRegister <- c		
+		c.Conn.Close()			
 	}()
 
 	for {
@@ -33,7 +33,7 @@ func (c *Client) Read(){
 			return
 		}
 		message := Message{Type: messageType,Body: string(p)}
-		c.Pool.Broadcast <- message		// this is how you write on the channel
+		c.Pool.Broadcast <- message	
 		fmt.Printf("message received :%+v\n",message)
 
 	}

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"backend/pkg/websocket"
 )
-// pool jo hai wo ek object hai Pool struct ka 
+
 func serveWs(pool *websocket.Pool,w http.ResponseWriter,r *http.Request){
 
 	fmt.Println("websocket end point reached");
@@ -21,14 +21,13 @@ func serveWs(pool *websocket.Pool,w http.ResponseWriter,r *http.Request){
 		Pool: pool,
 	}
 	pool.Register <- client
-	client.Read()  // Read ek struct ki method hai 
+	client.Read()
 }
 
 func setupRoutes(){
-	pool := websocket.NewPool(); //NewPool is the function in ur websocket package, that will acts as constructor and return a new Pool's object
-	go pool.Start()	// starting as the parallel process(go routine)(thread)
+	pool := websocket.NewPool(); 
+	go pool.Start()	
 
-	//this is websocket endPoint, jab is end point ko hit karoge to ye serveWs call hoga
 	http.HandleFunc("/ws",func(w http.ResponseWriter,r *http.Request){
 		serveWs(pool,w,r);
 	})
