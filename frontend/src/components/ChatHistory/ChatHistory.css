@@ -1,0 +1,11 @@
+.chat-history{
+    background-color: #2C2E43;
+    margin: 0;
+    padding: 20px;
+}
+
+.chat-history h2{
+    margin: 0;
+    padding: 0;
+    color:white;
+}
