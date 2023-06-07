@@ -12,7 +12,6 @@ export interface IConnectProps{
 const App:React.FC = () => {
 
   const [chatHistory,setChatHistory] = useState<Array<string>>([]);
-  //jo api se data aata hai wo agar json me bhi ho to lekin wo string me hota hai mtlb json(object) lekin string 
 
   useEffect(()=>{
     let props:  IConnectProps = {
